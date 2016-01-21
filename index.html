@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  
+    <title>Nick Rang Project</title>
+
+    <link rel="icon" type="image/png" href="img/spp.png">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts Dosis -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis">
+    
+    <!-- Hover.css -->
+    <link rel="stylesheet" href="css/hover-min.css">
+    
+    <!-- Custom CSS -->
+   <link rel="stylesheet" href="css/main.css"> 
+    
+    
+    <!-- Jquery UI autocomplete -->
+    <link rel="stylesheet" href="js/libraries/jquery-ui-autocomplete/jquery-ui.css" />
+    <style> 
+		
+		body { 
+		font-family: 'Dosis', sans-serif;
+		background-color:white/* #FFF6E5 */;
+		}
+		
+		
+		p.thick {
+			font-weight: bold;
+		}
+		
+		.page-header{
+			font-style:normal;
+			font-size:22px;
+			margin-top:80px;
+		}
+		
+		.buttons{
+			margin:20px;
+		}
+		
+		.container{
+			width:95%; !important
+		}
+		
+		h3{
+			color:#3E454C;
+			font-weight: bold;
+			text-transform:uppercase;
+			font-size:22px;
+		}
+
+ 		/*  
+			D3 Specific Styles
+			====================
+		*/
+ 		/* 
+.line{
+ 			stroke: #2185C5;
+			fill: none;
+ 		}
+		
+		.line.before {
+ 			 stroke: none;
+			}
+		
+		.line_market{
+			stroke: #7FC6BC;
+			fill: none;
+		}
+ */
+		
+		.axis path,
+		.axis line {
+			stroke:#31454C;
+			fill: none;
+			stroke-width: 1;
+			shape-rendering: crispEdges;
+		}
+		
+		#graph{
+			margin-left:0px;
+			margin-right:0px;
+		}
+		
+		
+		div.tooltip {	
+			position: absolute;			
+			text-align: center;			
+			width: 80px;					
+			height: 35px;					
+			padding: 2px;				
+			font-size: 12px;
+			font-family:'Dosis';		
+			background: #7ECEFD;	
+			border: 0px;		
+			border-radius: 8px;			
+			pointer-events: none;			
+		}
+		
+		.infopanel{
+			color:black;
+			font-family: 'Dosis';
+		}
+
+		.infopanel p{
+			font-size:18px;
+			color: black;
+		}
+		
+		
+	
+		
+
+
+		/*  
+			Menu Specific Styles
+			====================
+		*/
+
+		.panel {
+			position: fixed;
+			left: -15.625em; /*or width of your navigation panel*/
+			width: 15.625em; /*should match the above value*/
+		}
+
+		.menu-link:link, .menu-link:visited {
+			color: #fff;
+			background: #101820;
+			border-radius: 4px;
+			padding: .2em .4em;
+			text-decoration:none;
+		}
+
+		.menu-link:hover{
+			text-decoration: none;
+			color: #FF7F66;
+			transition: 0.2s ease;
+		}	
+
+		.wrap {
+			position: relative;
+		/*     max-width: 80%; */
+			margin: 0 auto;
+			padding: 20px;
+		}
+
+		.panel {
+			background: #101820;
+		}
+
+		.panel a {
+			color: #fff;
+			text-transform: uppercase;
+		}
+
+		.panel a:link, .panel a:visited {
+			color: #fff;
+		}
+
+		a {
+			text-decoration: none;
+			transition: 0.2s ease;
+		}
+
+		.panel li:hover {
+			text-decoration: none;
+			background-color: #FF7F66;
+			transition: 0.2s ease;
+		}
+
+		.panel a:hover {
+			text-decoration: none;
+			transition: 0.2s ease;
+		}
+
+		ul, li {
+			margin: 0;
+			padding: 0;
+		}
+
+		li {
+			list-style: none;
+			text-align:center;
+			border-bottom:1px solid #34495D;
+		}
+
+		.panel ul {
+			border-top: 2px solid #34495D;
+		}
+
+		nav li{
+			padding-top:10px;
+			padding-bottom:10px;
+		}
+
+	
+	</style>
+
+   
+</head>
+<body>
+
+
+<div class="container wrap push">
+
+
+	   <div class="row">
+           
+        
+        <div class="col-md-3">
+        	<h3 id="product-title1"> </h3>
+        	
+        	<form action="#">
+ 
+			  <fieldset>
+				<!-- <label for="product">Select a product</label> -->
+				<select name="product" id="product-select">
+				  <option selected="selected">product1</option>
+				  <option>product2</option>
+				  <option>product3</option>
+
+				</select>
+			  </fieldset>
+			  </form>
+				
+        	
+		</div>
+        
+        <div class="col-md-9">
+        
+        	<div class="buttons">
+				<button type="button" class="btn btn-default" data-months="one" id="button30"> 1 Month</button>
+				<button type="button" class="btn btn-default" data-months="three" id="button90"> 3 Months</button>
+				<button type="button" class="btn btn-default" data-months="six" id="button180"> 6 Months</button>
+				<button type="button" class="btn btn-default" data-months="twelve" id="button360"> 12 Months</button>
+			</div>
+			
+			<div id="graph">
+			</div>
+		
+
+		</div>
+
+
+		
+		
+	
+
+
+</div>
+    
+  
+    
+    <!-- jQuery -->
+    <script src="js/libraries/jquery.js"></script>
+    
+    <!-- jQuery Menu Slider -->
+    <script src="js/libraries/jquery.big-slide.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/libraries/bootstrap.min.js"></script>
+    
+    <!-- Moment -->
+    <script src="js/libraries/moment.js"></script>
+    
+     <!-- Moment-range -->
+    <script src="js/libraries/moment-range.js"></script>
+    
+    <!-- D3 -->
+    
+    <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+    
+   	<!-- underscore -->
+   	
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	
+	<!-- Jquery UI autocomplete -->
+	<script src="js/libraries/jquery-ui-autocomplete/jquery-ui.js" type="text/javascript"></script>
+	
+	
+	<!-- project files -->
+	<script src="js/main2.js" type="text/javascript"></script>
+	
+	<script>
+    $(document).ready(function() {
+        $('.menu-link').bigSlide();
+    });
+	</script>
+	
+
+
+	
+	
+	
+</body>
+
+</html>
