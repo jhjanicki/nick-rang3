@@ -365,31 +365,67 @@ function drawGraph(){
 
 			
 			// Add the valueline path.
-			 svg.append("path")
- 				// .attr("class", "line")
- 				// .filter(function(d){
-//  					 return d.date.isBefore(static_today);
-//  				})
+			//  svg.append("path")
+//  				// .attr("class", "line")
+//  				// .filter(function(d){
+// //  					 return d.date.isBefore(static_today);
+// //  				})
+// //  				.attr("stroke","#2185C5")
+// //  				.attr("stroke",function(d){
+// //  					if(d.date.isBefore(static_today)){
+// //  						return "none";
+// //  					}else{
+// //  						return "#2185C5";
+// //  					}
+// //  				
+// //  				})
 //  				.attr("stroke","#2185C5")
-//  				.attr("stroke",function(d){
-//  					if(d.date.isBefore(static_today)){
-//  						return "none";
-//  					}else{
-//  						return "#2185C5";
-//  					}
+//  				.attr("fill","none")
+//  				.transition()
+//  				.attr("d", valueline(static_filtered_data));
 //  				
-//  				})
- 				.attr("stroke","#2185C5")
- 				.attr("fill","none")
- 				.transition()
- 				.attr("d", valueline(static_filtered_data));
+//  			
+//  			svg.append("path")
+//  				// .attr("class","line_market")
+//  				.attr("stroke","#FFB779")
+//  				.attr("fill","none")
+//  				.attr("d",valueline_market(static_filtered_data));
+
+
+
+			svg.append("clipPath")
+			  .attr("id", "clip-before")
+			.append("rect")
+			  .attr("width", x(static_today))
+			  .attr("height", height);
+
+		  svg.append("clipPath")
+			  .attr("id", "clip-after")
+			.append("rect")
+			  .attr("x", x(static_today))
+			  .attr("width", width-x(static_today))
+			  .attr("height", height);
+
+		
+		
+			 svg.selectAll(".line")
+				  .data(["before", "after"])
+				.	enter().append("path")
+				  .attr("class", function(d) { return "line " + d; })
+				  .attr("clip-path", function(d) { return "url(#clip-" + d + ")"; })
+				  // .datum(data)
+				  .attr("d", valueline(static_filtered_data));
+
+			//  svg.append("path")
+//  				.attr("class", "line")
+//  				.transition()
+//  				.attr("d", valueline(static_filtered_data));
  				
  			
  			svg.append("path")
- 				// .attr("class","line_market")
- 				.attr("stroke","#FFB779")
- 				.attr("fill","none")
+ 				.attr("class","line_market")
  				.attr("d",valueline_market(static_filtered_data));
+
 
  			var div = d3.select("body").append("div")	
 				.attr("class", "tooltip")				
